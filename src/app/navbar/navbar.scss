@@ -1,0 +1,27 @@
+$primary: #0b1723;
+$secondary: #b1b9c1;
+$tertiary: #eab865;
+
+
+ul{
+    display:flex ;
+    justify-content: space-around;
+    
+    li{
+        display: flex;
+        color: $secondary;
+ list-style-type:none ;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+        font-family: system-ui;
+cursor: pointer;
+        &:hover{
+color: $tertiary;
+        }
+    }
+}
+
+a{
+     text-decoration: none;
+}
