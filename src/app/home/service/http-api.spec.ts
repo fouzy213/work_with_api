@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpApi } from './http-api';
+import { HttpApiHomePage } from './http-api-homePage';
 
 describe('HttpApi', () => {
-  let service: HttpApi;
+  let service: HttpApiHomePage;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HttpApi);
+    service = TestBed.inject(HttpApiHomePage);
   });
 
   it('should be created', () => {

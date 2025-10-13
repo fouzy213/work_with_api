@@ -3,13 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-movies',
   imports: [],
-  template: `
-    <p>
-      movies works!
-    </p>
-  `,
-  styleUrl: './movies.css'
+  template: ` <p>movies works!</p> `,
+  styleUrl: './movies.css',
 })
-export class Movies {
-
-}
+export class Movies {}
