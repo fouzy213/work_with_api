@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpApiHomePage } from './service/http-api-homePage';
-
+import { HttpApiHomePage } from '../service/http-api-homePage';
+import { Header } from '../header/header';
 interface Movie {
   id: number;
   title: string;
@@ -11,59 +11,63 @@ interface Movie {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Header],
   template: `
+    <app-header></app-header>
     <h1>Film populaire à l’affiche</h1>
-    @for(movie of movies; track movie.id ) {
-    <li>
-      <img
-        class="image_affiche"
-        [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + movie.poster_path"
-        [alt]="movie.title"
-      />
-      <h3>{{ movie.title }}</h3>
-      <p>{{ movie.overview }}</p>
-    </li>
-    }
+    <div class="all_movie">
+      @for(movie of movies; track movie.id ) {
+      <li>
+        <img
+          class="image_affiche"
+          [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + movie.poster_path"
+          [alt]="movie.title"
+        />
+        <h3>{{ movie.title }}</h3>
+      </li>
+      }
+    </div>
 
     <h1>Films du moment</h1>
-    @for(trend of trends; track trend.id ) {
-    <li>
-      <img
-        class="image_affiche"
-        [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + trend.poster_path"
-        [alt]="trend.title"
-      />
-      <h3>{{ trend.title }}</h3>
-      <p>{{ trend.overview }}</p>
-    </li>
-    }
-
+    <div class="all_movie">
+      @for(trend of trends; track trend.id ) {
+      <li>
+        <img
+          class="image_affiche"
+          [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + trend.poster_path"
+          [alt]="trend.title"
+        />
+        <h3>{{ trend.title }}</h3>
+      </li>
+      }
+    </div>
     <h1>Tendances actuelles</h1>
-    @for(latest of latests; track latest.id ) {
-    <li>
-      <img
-        class="image_affiche"
-        [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + latest.poster_path"
-        [alt]="latest.title"
-      />
-      <h3>{{ latest.title }}</h3>
-      <p>{{ latest.overview }}</p>
-    </li>
-    }
-    <h1>Film les mieux notés</h1>
+    <div class="all_movie">
+      @for(latest of latests; track latest.id ) {
+      <li>
+        <img
+          class="image_affiche"
+          [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + latest.poster_path"
+          [alt]="latest.title"
+        />
+        <h3>{{ latest.title }}</h3>
+      </li>
+      }
+    </div>
 
-    @for (topRated of topRateds ;track topRated.id){
-    <li>
-      <img
-        class="image_affiche"
-        [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + topRated.poster_path"
-        [alt]="topRated.title"
-      />
-      <h3>{{ topRated.title }}</h3>
-      <p>{{ topRated.overview }}</p>
-    </li>
-    }
+    <h1>Film les mieux notés</h1>
+    <div class="all_movie">
+      @for (topRated of topRateds ;track topRated.id){
+      <li>
+        <img
+          class="image_affiche"
+          [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + topRated.poster_path"
+          [alt]="topRated.title"
+        />
+        <h3>{{ topRated.title }}</h3>
+      </li>
+      }
+    </div>
   `,
   styleUrl: './home.scss',
 })

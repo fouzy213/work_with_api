@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
   template: `
     <nav>
       <ul>
-        <li [routerLink]="['/']">Home</li>
+        <h2 class="title_home">CINEMA</h2>
+        <li [routerLink]="['/']">Accueil</li>
 
         <li [routerLink]="['movies']">Film</li>
 

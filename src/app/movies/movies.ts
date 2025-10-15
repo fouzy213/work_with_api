@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpApiMovies } from '../home/service/http-api_movies';
+import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpApiMovies } from '../service/http-api_movies';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,27 +10,39 @@ import { map } from 'rxjs/operators';
   imports: [CommonModule],
   template: `
     <h1>Films par genre</h1>
+
     @for (genre of genresWithMovies; track genre.id) {
-    <section>
+    <section class="genre-section">
       <h2>{{ genre.name }}</h2>
-      <ul class="movie-list">
-        @for (movie of genre.movies; track movie.id) {
-        <li>
-          <img
-            [src]="'https://media.themoviedb.org/t/p/w300' + movie.poster_path"
-            [alt]="movie.title"
-          />
-          <h4>{{ movie.title }}</h4>
-        </li>
-        }
-      </ul>
+
+      <div class="carousel-container">
+        <button class="arrow left" (click)="scrollLeft(genre.id)"></button>
+
+        <div class="carousel" #carousel>
+          <ul class="movie-list">
+            @for (movie of genre.movies; track movie.id) {
+            <li>
+              <img
+                [src]="'https://media.themoviedb.org/t/p/w300' + movie.poster_path"
+                [alt]="movie.title"
+              />
+              <h4>{{ movie.title }}</h4>
+            </li>
+            }
+          </ul>
+        </div>
+
+        <button class="arrow right" (click)="scrollRight(genre.id)"></button>
+      </div>
     </section>
     }
   `,
-  styleUrl: './movies.css',
+  styleUrls: ['./movies.css'],
 })
 export class Movies implements OnInit {
   genresWithMovies: { id: number; name: string; movies: any[] }[] = [];
+
+  @ViewChildren('carousel') carousels!: QueryList<ElementRef<HTMLDivElement>>;
 
   constructor(private http: HttpApiMovies) {}
 
@@ -42,7 +54,7 @@ export class Movies implements OnInit {
             map((res) => ({
               id: genre.id,
               name: genre.name,
-              movies: res.results.slice(0, 5),
+              movies: res.results.slice(),
             }))
           )
         );
@@ -52,10 +64,25 @@ export class Movies implements OnInit {
             this.genresWithMovies = genresMovies;
             console.log('Films par genre :', this.genresWithMovies);
           },
-          error: (err) => console.error(err),
+          error: (err) => console.error('Erreur films par genre:', err),
         });
       },
       error: (err) => console.error('Erreur genres:', err),
     });
+  }
+
+  scrollLeft(genreId: number) {
+    const carousel = this.getCarouselByGenreId(genreId);
+    if (carousel) carousel.scrollBy({ left: -300, behavior: 'smooth' });
+  }
+
+  scrollRight(genreId: number) {
+    const carousel = this.getCarouselByGenreId(genreId);
+    if (carousel) carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  }
+
+  private getCarouselByGenreId(genreId: number): HTMLDivElement | null {
+    const index = this.genresWithMovies.findIndex((movie) => movie.id === genreId);
+    return this.carousels?.toArray()[index]?.nativeElement ?? null;
   }
 }

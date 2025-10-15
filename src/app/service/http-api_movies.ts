@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environment';
+import { environment } from '../../environment';
 import { Observable } from 'rxjs';
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  overview: string;
-}
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpApiSeries } from '../home/service/http-api-series';
+import { HttpApiSeries } from '../service/http-api-series';
 import { CommonModule } from '@angular/common';
 interface Serie {
   id: number;
