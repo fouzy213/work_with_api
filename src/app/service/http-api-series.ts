@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 
 interface Serie {
   id: number;
-  title: string;
   poster_path: string;
   overview: string;
+  name:string
 }
 
 @Injectable({

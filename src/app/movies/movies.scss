@@ -31,7 +31,7 @@
 
 .movie-list li {
   flex: 0 0 auto;
-  width: 150px;
+  width: 180px;
   text-align: center;
   color: #b1b9c1;
 }
@@ -49,16 +49,17 @@
 
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 33%;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
   font-size: 1.5rem;
-  padding: 8rem 0.6rem;
+  padding: 20px;
   cursor: pointer;
   z-index: 10;
 }
+
 
 .arrow.left {
   left: 0.5rem;

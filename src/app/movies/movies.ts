@@ -37,7 +37,7 @@ import { map } from 'rxjs/operators';
     </section>
     }
   `,
-  styleUrls: ['./movies.css'],
+  styleUrls: ['./movies.scss'],
 })
 export class Movies implements OnInit {
   genresWithMovies: { id: number; name: string; movies: any[] }[] = [];

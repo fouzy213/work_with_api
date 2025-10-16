@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `
     <nav>
+      <div class="all_navbar">
       <ul>
         <h2 class="title_home">CINEMA</h2>
         <li [routerLink]="['/']">Accueil</li>
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
 
         <li [routerLink]="['series']">Serie</li>
       </ul>
+      </div>
     </nav>
   `,
   styleUrl: './navbar.scss',

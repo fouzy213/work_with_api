@@ -1,0 +1,28 @@
+.image_affiche_header {
+  width: 30%;
+    margin-bottom: 2rem;
+
+}
+.title_movie{
+ color: white;
+}
+
+.para_movie{
+   color: white;
+}
+.single_movie{
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+}
+.title_and_para{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.paragrape_error{
+  background-color: red;
+  color: aqua;
+}

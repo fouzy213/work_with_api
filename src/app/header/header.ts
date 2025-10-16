@@ -21,14 +21,20 @@ interface Movie {
         [src]="'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + randomMovie.poster_path"
         [alt]="randomMovie.title"
       />
-      <h3>{{ randomMovie.title }}</h3>
-      <p>{{ randomMovie.overview }}</p>
+      <div class="title_and_para">
+      <h4 class="title_movie">{{ randomMovie.title }}</h4>
+      <p class="para_movie">{{ randomMovie.overview }}</p>
+      @if (!randomMovie.overview){
+        <p>il n'y a pas de synopsie du film dans l'api</p>
+      }
     </div>
+        </div>
+
     } @else {
     <p>Chargement du film...</p>
     }
   `,
-  styleUrl: './header.css',
+  styleUrl: './header.scss',
 })
 export class Header implements OnInit {
   movies: Movie[] = [];
@@ -43,7 +49,6 @@ export class Header implements OnInit {
         const randomIndex = Math.floor(Math.random() * this.movies.length);
         this.randomMovie = this.movies[randomIndex];
 
-        console.log('Film choisi :', this.randomMovie);
       },
       error: (err) => console.error(err),
     });

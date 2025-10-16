@@ -1,6 +1,7 @@
 $primary: #0b1723;
 $secondary: #b1b9c1;
 $tertiary: white;
+
 .title_home{
    color:#d40924 
 }
@@ -8,7 +9,7 @@ $tertiary: white;
 ul{
     display:flex ;
     justify-content: space-around;
-    
+    align-items: center;
     li{
         display: flex;
         color: $secondary;
