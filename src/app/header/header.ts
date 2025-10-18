@@ -25,7 +25,7 @@ interface Movie {
       <h4 class="title_movie">{{ randomMovie.title }}</h4>
       <p class="para_movie">{{ randomMovie.overview }}</p>
       @if (!randomMovie.overview){
-        <p>il n'y a pas de synopsie du film dans l'api</p>
+        <p class="para_movie">Il n'y a pas de synopsie du film dans l'API</p>
       }
     </div>
         </div>
