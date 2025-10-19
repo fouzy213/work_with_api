@@ -1,0 +1,21 @@
+.all_cards{
+    display: flex;
+flex-direction: row-reverse;
+align-items: center;
+gap: 20%;
+    h1 {
+        display: flex;
+        flex-direction: column;
+        color: white;
+    
+    }
+    p{
+        color: white;
+    }
+.title_para{
+    padding: 200px;
+}
+
+
+
+}

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HttpApiMovies } from '../service/http-api_movies';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 export interface MediaByIdType {
-  type?: "movie" | "tv";
-}  
+  type?: 'movie' | 'tv';
+}
 @Component({
   selector: 'app-movies',
   standalone: true,
@@ -25,12 +25,12 @@ export interface MediaByIdType {
           <ul class="movie-list">
             @for (movie of genre.movies; track movie.id) {
             <li>
-<a [routerLink]="['/', getMovieType(movie), movie.id]">
-                  <img
-                [src]="'https://media.themoviedb.org/t/p/w300' + movie.poster_path"
-                [alt]="movie.title"
-              />
-</a>
+              <a [routerLink]="['/', getMovieType(movie), movie.id]">
+                <img
+                  [src]="'https://media.themoviedb.org/t/p/w300' + movie.poster_path"
+                  [alt]="movie.title"
+                />
+              </a>
               <h4>{{ movie.title }}</h4>
             </li>
             }
@@ -66,8 +66,8 @@ export class Movies implements OnInit {
 
         forkJoin(genreRequests).subscribe({
           next: (genresMovies) => {
-            this.genresWithMovies = genresMovies.slice(0,5);
-            
+            this.genresWithMovies = genresMovies.slice(0, 5);
+
             console.log('Films par genre :', this.genresWithMovies);
           },
           error: (err) => console.error('Erreur films par genre:', err),
@@ -87,12 +87,9 @@ export class Movies implements OnInit {
     if (carousel) carousel.scrollBy({ left: 300, behavior: 'smooth' });
   }
 
-getMovieType(movie: any): 'movie' | 'tv' {
-  return movie.type !== 'movie' ? 'movie' : 'tv';
-  
-}
-
-
+  getMovieType(movie: any): 'movie' | 'tv' {
+    return movie.type !== 'movie' ? 'movie' : 'tv';
+  }
 
   private getCarouselByGenreId(genreId: number): HTMLDivElement | null {
     const index = this.genresWithMovies.findIndex((movie) => movie.id === genreId);

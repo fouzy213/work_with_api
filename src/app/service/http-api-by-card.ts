@@ -23,11 +23,14 @@ export class HttpApiByCard {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json;charset=utf-8',
+      
     });
+
 
     return this.http.get<MovieAndSerie>(
       `${this.url}/${type}/${id}?language=fr-FR`,
       { headers }
+      
     );
   }
 }

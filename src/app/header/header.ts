@@ -12,7 +12,7 @@ interface Movie {
   selector: 'app-header',
   imports: [CommonModule],
   template: `
-    <h1>Film du moment</h1>
+    <h1 class="title_movie">Film du moment</h1>
 
     @if (randomMovie) {
     <div class="single_movie">
