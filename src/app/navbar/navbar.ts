@@ -7,8 +7,19 @@ import { RouterModule } from '@angular/router';
   template: `
     <nav>
       <div class="all_navbar">
-      <ul>
-        <h2 class="title_home">CINEMA</h2>
+        
+        
+        <div class="burger" (click)="toggleMenu()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        
+        
+        
+        <ul [class.active]="menuActive">         
+          <h2 class="title_home">CINEMA</h2>
+          
         <li [routerLink]="['/']">Accueil</li>
 
         <li [routerLink]="['movies']">Film</li>
@@ -20,4 +31,10 @@ import { RouterModule } from '@angular/router';
   `,
   styleUrl: './navbar.scss',
 })
-export class Navbar {}
+export class Navbar {
+    menuActive = false;
+
+  toggleMenu() {
+    this.menuActive = !this.menuActive;
+  }
+}

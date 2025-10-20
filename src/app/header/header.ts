@@ -12,6 +12,7 @@ interface Movie {
   selector: 'app-header',
   imports: [CommonModule],
   template: `
+  <div class="all_header">
     <h1 class="title_movie">Film du moment</h1>
 
     @if (randomMovie) {
@@ -28,12 +29,12 @@ interface Movie {
         <p class="para_movie">Il n'y a pas de synopsie du film dans l'API</p>
       }
     </div>
-        </div>
-
-    } @else {
-    <p>Chargement du film...</p>
-    }
-  `,
+  </div>
+} @else {
+  <p>Chargement du film...</p>
+}
+</div>
+`,
   styleUrl: './header.scss',
 })
 export class Header implements OnInit {

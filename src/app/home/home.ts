@@ -1,16 +1,17 @@
+import { Util } from './../service/util';
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpApiHomePage } from '../service/http-api-homePage';
 import { Header } from '../header/header';
 import { RouterLink } from "@angular/router";
 
-interface Media {
+ export interface Media {
   id: number;
   title?: string ;
   name?:string;
   poster_path: string;
   overview: string;
-   media_type?: 'movie' | 'tv';
+  media_type?: 'movie' | 'tv';
 }
 
 @Component({
@@ -21,7 +22,7 @@ interface Media {
     <app-header></app-header>
 
     <div class="carousel-section">
-      <h2>Film populaire à l’affiche</h2>
+      <h2>Films populaires à l’affiche</h2>
       <div class="carousel-container">
         <button class="arrow left" (click)="scrollLeft(0)"></button>
         <div class="carousel" #carousel>
@@ -137,9 +138,9 @@ export class Home implements OnInit {
   latests: Media[] = [];
   topRateds: Media[] = [];
 
-  @ViewChildren('carousel') carousels!: QueryList<ElementRef<HTMLDivElement>>;
+   @ViewChildren('carousel') carousels!: QueryList<ElementRef<HTMLDivElement>>;
 
-  constructor(private http: HttpApiHomePage) {}
+  constructor(private http: HttpApiHomePage, private util: Util) {}
 
   ngOnInit(): void {
     this.http.fetchMedia().subscribe({
@@ -163,21 +164,19 @@ export class Home implements OnInit {
     });
   }
 
-  scrollLeft(sectionIndex: number) {
-    const carousel = this.carousels.toArray()[sectionIndex]?.nativeElement;
-    if (carousel) carousel.scrollBy({ left: -300, behavior: 'smooth' });
+  ngAfterViewInit() {
+    this.util.setCarousels(this.carousels.toArray());
   }
 
-  scrollRight(sectionIndex: number) {
-    const carousel = this.carousels.toArray()[sectionIndex]?.nativeElement;
-    if (carousel) carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  scrollLeft(index: number) {
+    this.util.scrollLeft(index);
   }
 
+  scrollRight(index: number) {
+    this.util.scrollRight(index);
+  }
 
-getMovieType(movie: Media): 'movie' | 'tv' {
-  if (movie.media_type) return movie.media_type;
-
-  return movie.name && !movie.title ? 'tv' : 'movie';
-}
-
+  getMovieType(movie: Media) {
+    return this.util.getMovieType(movie);
+  }
 }

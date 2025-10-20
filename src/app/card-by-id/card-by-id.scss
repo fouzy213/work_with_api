@@ -15,6 +15,22 @@ gap: 20%;
 .title_para{
     padding: 200px;
 }
+}
+
+@media (max-width: 1480px) {
+
+.all_cards{
+display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 20%;
+  
+}
+
+  .title_para{
+    display: flex;
+    flex-direction: column;
+align-items: center;}
 
 
 

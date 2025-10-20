@@ -1,3 +1,4 @@
+import { Util } from './../service/util';
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpApiSeries } from '../service/http-api-series';
@@ -75,7 +76,7 @@ interface Serie {
           <ul class="serie-list">
             @for(onAir of onAirs; track onAir.id) {
             <li>
-              <a [routerLink]="['/', getSerieType(onAir), onAir.id]">
+              <a [routerLink]="['/', getSerieType (onAir), onAir.id]">
                 <img
                   [src]="
                     'https://media.themoviedb.org/t/p/w600_and_h900_bestv2' + onAir.poster_path
@@ -129,7 +130,7 @@ export class Series implements OnInit {
 
   @ViewChildren('carousel') carousels!: QueryList<ElementRef<HTMLDivElement>>;
 
-  constructor(private http: HttpApiSeries) {}
+  constructor(private http: HttpApiSeries, private util: Util) {}
 
   ngOnInit(): void {
     this.http.fetchSeriePopular().subscribe({
@@ -153,17 +154,21 @@ export class Series implements OnInit {
     });
   }
 
-  scrollLeft(sectionIndex: number) {
-    const carousel = this.carousels.toArray()[sectionIndex]?.nativeElement;
-    if (carousel) carousel.scrollBy({ left: -300, behavior: 'smooth' });
-  }
-
-  scrollRight(sectionIndex: number) {
-    const carousel = this.carousels.toArray()[sectionIndex]?.nativeElement;
-    if (carousel) carousel.scrollBy({ left: 300, behavior: 'smooth' });
-  }
-
-  getSerieType(movie: any): 'movie' | 'tv' {
-    return movie.type !== 'tv' ? 'tv' : 'movie';
-  }
+   ngAfterViewInit() {
+      this.util.setCarousels(this.carousels.toArray());
+    }
+  
+    scrollLeft(index: number) {
+      this.util.scrollLeft(index);
+    }
+  
+    scrollRight(index: number) {
+      this.util.scrollRight(index);
+    }
+ 
+getSerieType(serie: Serie) {
+  return this.util.getMovieType(serie);
 }
+  }
+  
+

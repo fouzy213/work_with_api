@@ -23,6 +23,26 @@
   gap: 20px;
 }
 
-p{
-  color: aqua;
+
+@media (max-width: 1480px) {
+  .image_affiche_header {
+  width: 30%;
+    margin-bottom: 2rem;
+
+
+  }
+  .all_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+
+  .single_movie{
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  align-items: center
+}
 }

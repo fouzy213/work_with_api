@@ -1,9 +1,11 @@
+import { Util } from './../service/util';
 import { Component, OnInit, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpApiMovies } from '../service/http-api_movies';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouterLink } from '@angular/router';
+import { Media } from '../home/home';
 export interface MediaByIdType {
   type?: 'movie' | 'tv';
 }
@@ -49,7 +51,7 @@ export class Movies implements OnInit {
 
   @ViewChildren('carousel') carousels!: QueryList<ElementRef<HTMLDivElement>>;
 
-  constructor(private http: HttpApiMovies) {}
+  constructor(private http: HttpApiMovies ,private util: Util) {}
 
   ngOnInit(): void {
     this.http.fetchGenres().subscribe({
@@ -77,22 +79,19 @@ export class Movies implements OnInit {
     });
   }
 
-  scrollLeft(genreId: number) {
-    const carousel = this.getCarouselByGenreId(genreId);
-    if (carousel) carousel.scrollBy({ left: -300, behavior: 'smooth' });
+ ngAfterViewInit() {
+    this.util.setCarousels(this.carousels.toArray());
   }
 
-  scrollRight(genreId: number) {
-    const carousel = this.getCarouselByGenreId(genreId);
-    if (carousel) carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  scrollLeft(index: number) {
+    this.util.scrollLeft(index);
   }
 
-  getMovieType(movie: any): 'movie' | 'tv' {
-    return movie.type !== 'movie' ? 'movie' : 'tv';
+  scrollRight(index: number) {
+    this.util.scrollRight(index);
   }
 
-  private getCarouselByGenreId(genreId: number): HTMLDivElement | null {
-    const index = this.genresWithMovies.findIndex((movie) => movie.id === genreId);
-    return this.carousels?.toArray()[index]?.nativeElement ?? null;
+  getMovieType(movie: MediaByIdType) {
+    return this.util.getMovieType(movie as Media);
   }
 }
